@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище HotelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalculatedCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdRegistrationCard" Type="int" Nullable="false" />
+          <Property Name="IsPayBooking" Type="bit" Nullable="false" />
+          <Property Name="DateDeparture" Type="date" Nullable="false" />
+          <Property Name="CountPayDay" Type="int" Nullable="false" />
+          <Property Name="FinishPrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="NumberClient" />
+          </Key>
+          <Property Name="NumberClient" Type="int" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Number">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="numberRoom" Type="int" Nullable="false" />
+          <Property Name="IdTypeNumber" Type="int" Nullable="false" />
+          <Property Name="IsBusy" Type="bit" Nullable="false" />
+          <Property Name="CountRoom" Type="int" Nullable="false" />
+          <Property Name="Floor" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="IsBooking" Type="bit" Nullable="false" />
+          <Property Name="CountClient" Type="int" Nullable="false" />
+          <Property Name="PriceOneClient" Type="money" Nullable="false" />
+          <Property Name="CountFreePlace" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NumberClient" Type="int" Nullable="false" />
+          <Property Name="NumberRoom" Type="int" Nullable="false" />
+          <Property Name="DateArrival" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="FIO" />
+          </Key>
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="post" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="service number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Archive_CalculatedCard">
+          <End Role="CalculatedCard" Type="Self.CalculatedCard" Multiplicity="1" />
+          <End Role="Archive" Type="Self.Archive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalculatedCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Archive">
+              <PropertyRef Name="Photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Number_TypeNumber">
+          <End Role="TypeNumber" Type="Self.TypeNumber" Multiplicity="1" />
+          <End Role="Number" Type="Self.Number" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Number">
+              <PropertyRef Name="IdTypeNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationCard_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="RegistrationCard" Type="Self.RegistrationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="NumberClient" />
+            </Principal>
+            <Dependent Role="RegistrationCard">
+              <PropertyRef Name="NumberClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationCard_Number">
+          <End Role="Number" Type="Self.Number" Multiplicity="1" />
+          <End Role="RegistrationCard" Type="Self.RegistrationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Number">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationCard">
+              <PropertyRef Name="NumberRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HotelModelContainer">
+          <EntitySet Name="Archive" EntityType="Self.Archive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalculatedCard" EntityType="Self.CalculatedCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Number" EntityType="Self.Number" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationCard" EntityType="Self.RegistrationCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeNumber" EntityType="Self.TypeNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Archive_CalculatedCard" Association="Self.FK_Archive_CalculatedCard">
+            <End Role="CalculatedCard" EntitySet="CalculatedCard" />
+            <End Role="Archive" EntitySet="Archive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Number_TypeNumber" Association="Self.FK_Number_TypeNumber">
+            <End Role="TypeNumber" EntitySet="TypeNumber" />
+            <End Role="Number" EntitySet="Number" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationCard_Client" Association="Self.FK_RegistrationCard_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="RegistrationCard" EntitySet="RegistrationCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationCard_Number" Association="Self.FK_RegistrationCard_Number">
+            <End Role="Number" EntitySet="Number" />
+            <End Role="RegistrationCard" EntitySet="RegistrationCard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CalculatedCard" Relationship="Self.FK_Archive_CalculatedCard" FromRole="Archive" ToRole="CalculatedCard" />
+        </EntityType>
+        <EntityType Name="CalculatedCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdRegistrationCard" Type="Int32" Nullable="false" />
+          <Property Name="IsPayBooking" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeparture" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CountPayDay" Type="Int32" Nullable="false" />
+          <Property Name="FinishPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Archive" Relationship="Self.FK_Archive_CalculatedCard" FromRole="CalculatedCard" ToRole="Archive" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="NumberClient" />
+          </Key>
+          <Property Name="NumberClient" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RegistrationCard" Relationship="Self.FK_RegistrationCard_Client" FromRole="Client" ToRole="RegistrationCard" />
+        </EntityType>
+        <EntityType Name="Number">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="numberRoom" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeNumber" Type="Int32" Nullable="false" />
+          <Property Name="IsBusy" Type="Boolean" Nullable="false" />
+          <Property Name="CountRoom" Type="Int32" Nullable="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="IsBooking" Type="Boolean" Nullable="false" />
+          <Property Name="CountClient" Type="Int32" Nullable="false" />
+          <Property Name="PriceOneClient" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CountFreePlace" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypeNumber" Relationship="Self.FK_Number_TypeNumber" FromRole="Number" ToRole="TypeNumber" />
+          <NavigationProperty Name="RegistrationCard" Relationship="Self.FK_RegistrationCard_Number" FromRole="Number" ToRole="RegistrationCard" />
+        </EntityType>
+        <EntityType Name="RegistrationCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NumberClient" Type="Int32" Nullable="false" />
+          <Property Name="NumberRoom" Type="Int32" Nullable="false" />
+          <Property Name="DateArrival" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_RegistrationCard_Client" FromRole="RegistrationCard" ToRole="Client" />
+          <NavigationProperty Name="Number" Relationship="Self.FK_RegistrationCard_Number" FromRole="RegistrationCard" ToRole="Number" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Number" Relationship="Self.FK_Number_TypeNumber" FromRole="TypeNumber" ToRole="Number" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="FIO" />
+          </Key>
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="service_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Archive_CalculatedCard">
+          <End Role="CalculatedCard" Type="Self.CalculatedCard" Multiplicity="1" />
+          <End Role="Archive" Type="Self.Archive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalculatedCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Archive">
+              <PropertyRef Name="Photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationCard_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="RegistrationCard" Type="Self.RegistrationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="NumberClient" />
+            </Principal>
+            <Dependent Role="RegistrationCard">
+              <PropertyRef Name="NumberClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Number_TypeNumber">
+          <End Role="TypeNumber" Type="Self.TypeNumber" Multiplicity="1" />
+          <End Role="Number" Type="Self.Number" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Number">
+              <PropertyRef Name="IdTypeNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationCard_Number">
+          <End Role="Number" Type="Self.Number" Multiplicity="1" />
+          <End Role="RegistrationCard" Type="Self.RegistrationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Number">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationCard">
+              <PropertyRef Name="NumberRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Archive" EntityType="Self.Archive" />
+          <EntitySet Name="CalculatedCard" EntityType="Self.CalculatedCard" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Number" EntityType="Self.Number" />
+          <EntitySet Name="RegistrationCard" EntityType="Self.RegistrationCard" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeNumber" EntityType="Self.TypeNumber" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Archive_CalculatedCard" Association="Self.FK_Archive_CalculatedCard">
+            <End Role="CalculatedCard" EntitySet="CalculatedCard" />
+            <End Role="Archive" EntitySet="Archive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationCard_Client" Association="Self.FK_RegistrationCard_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="RegistrationCard" EntitySet="RegistrationCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Number_TypeNumber" Association="Self.FK_Number_TypeNumber">
+            <End Role="TypeNumber" EntitySet="TypeNumber" />
+            <End Role="Number" EntitySet="Number" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationCard_Number" Association="Self.FK_RegistrationCard_Number">
+            <End Role="Number" EntitySet="Number" />
+            <End Role="RegistrationCard" EntitySet="RegistrationCard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HotelModelContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="Archive">
+            <EntityTypeMapping TypeName="HotelModel.Archive">
+              <MappingFragment StoreEntitySet="Archive">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalculatedCard">
+            <EntityTypeMapping TypeName="HotelModel.CalculatedCard">
+              <MappingFragment StoreEntitySet="CalculatedCard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRegistrationCard" ColumnName="IdRegistrationCard" />
+                <ScalarProperty Name="IsPayBooking" ColumnName="IsPayBooking" />
+                <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
+                <ScalarProperty Name="CountPayDay" ColumnName="CountPayDay" />
+                <ScalarProperty Name="FinishPrice" ColumnName="FinishPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="HotelModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="NumberClient" ColumnName="NumberClient" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Number">
+            <EntityTypeMapping TypeName="HotelModel.Number">
+              <MappingFragment StoreEntitySet="Number">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="numberRoom" ColumnName="numberRoom" />
+                <ScalarProperty Name="IdTypeNumber" ColumnName="IdTypeNumber" />
+                <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
+                <ScalarProperty Name="CountRoom" ColumnName="CountRoom" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
+                <ScalarProperty Name="CountClient" ColumnName="CountClient" />
+                <ScalarProperty Name="PriceOneClient" ColumnName="PriceOneClient" />
+                <ScalarProperty Name="CountFreePlace" ColumnName="CountFreePlace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationCard">
+            <EntityTypeMapping TypeName="HotelModel.RegistrationCard">
+              <MappingFragment StoreEntitySet="RegistrationCard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NumberClient" ColumnName="NumberClient" />
+                <ScalarProperty Name="NumberRoom" ColumnName="NumberRoom" />
+                <ScalarProperty Name="DateArrival" ColumnName="DateArrival" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HotelModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeNumber">
+            <EntityTypeMapping TypeName="HotelModel.TypeNumber">
+              <MappingFragment StoreEntitySet="TypeNumber">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HotelModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="service_number" ColumnName="service number" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
