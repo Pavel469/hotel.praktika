@@ -4,6 +4,30 @@
              xmlns:local="clr-namespace:hotel.praktika"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Times New Roman "/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Times New Roman "/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Times New Roman "/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Times New Roman "/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#50c878"/>
+        </Style>
+        
     </Application.Resources>
 </Application>

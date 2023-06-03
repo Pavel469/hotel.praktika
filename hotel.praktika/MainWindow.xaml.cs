@@ -22,9 +22,12 @@ namespace hotel.praktika
     /// </summary>
     public partial class MainWindow : Window
     {
+        HotelEntities context;
         public MainWindow()
         {
             InitializeComponent();
+            context = new HotelEntities();
+            myFrame.Navigate(new Pages.Authorization(context));
         }
         /*  public void DownloadPictures()
           {
