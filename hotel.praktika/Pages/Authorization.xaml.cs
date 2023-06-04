@@ -77,6 +77,12 @@ namespace hotel.praktika.Pages
 
 
         }
+
+        private void RegistrationClick(object sender, RoutedEventArgs e)
+        {
+            Registration regWindow = new Registration(context);
+            regWindow.Show();
+        }
     }
     }
 
