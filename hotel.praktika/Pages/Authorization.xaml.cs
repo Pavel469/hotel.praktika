@@ -61,8 +61,7 @@ namespace hotel.praktika.Pages
                     MessageBox.Show("Вы ввели неверный пароль!");
                     if (countClick >=3)
                     {
-                        buttonEnter.IsEnabled = false;
-                        timer.Start();
+                        rememberBtn.Visibility = Visibility.Visible;
                     }
                 }
             }
@@ -71,8 +70,7 @@ namespace hotel.praktika.Pages
                 MessageBox.Show("Такого пользователя не существует!");
                 if (countClick >= 3)
 
-                    buttonEnter.IsEnabled = false;
-                timer.Start();
+                    rememberBtn.Visibility = Visibility.Visible;
             }
 
 
@@ -83,6 +81,12 @@ namespace hotel.praktika.Pages
             Registration regWindow = new Registration(context);
             regWindow.Show();
         }
+
+        private void RememberPassClick(object sender, RoutedEventArgs e)
+        {
+            Users us = context.Users.Find(loginBox.Text);
+            NavigationService.Navigate(new RememberPassPage(us));
+        }
     }
-    }
+}
 
