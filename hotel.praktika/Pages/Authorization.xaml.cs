@@ -53,8 +53,9 @@ namespace hotel.praktika.Pages
                 {
                     MessageBox.Show("Вы успешно авторизованы!");
                     countClick = 0;
+                    NavigationService.Navigate(new MainMenuPage(context));
 
-                   
+
                 }
                 else
                 {
