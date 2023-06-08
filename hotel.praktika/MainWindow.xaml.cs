@@ -27,7 +27,7 @@ namespace hotel.praktika
         {
             InitializeComponent();
             context = new HotelEntities();
-            myFrame.Navigate(new Pages.Authorization(context));
+            myFrame.Navigate(new Pages.Authorization(context,this));
         }
         /*  public void DownloadPictures()
           {

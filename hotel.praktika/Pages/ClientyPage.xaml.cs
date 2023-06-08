@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace hotel.praktika.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenuPage.xaml
+    /// Логика взаимодействия для ClientyPage.xaml
     /// </summary>
-    public partial class MainMenuPage : Page
+    public partial class ClientyPage : Page
     {
-        Window Window;
-        public MainMenuPage(HotelEntities context,Window window )
+        public ClientyPage()
         {
             InitializeComponent();
-            Window= window;
-        }
-
-        private void EscapeClick(object sender, RoutedEventArgs e)
-        {
-            Window.Close();
         }
     }
 }

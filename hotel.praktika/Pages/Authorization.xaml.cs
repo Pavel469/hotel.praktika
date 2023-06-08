@@ -23,10 +23,12 @@ namespace hotel.praktika.Pages
     {
         HotelEntities context;
         DispatcherTimer timer;
-        public Authorization(HotelEntities cont)
+        Window window; 
+        public Authorization(HotelEntities cont, Window w)
         {
             InitializeComponent();
             context = cont;
+            window= w;
             timer = new DispatcherTimer();
             timer.Interval= new TimeSpan(0,0,30);
             timer.Tick += Timer_Tick;
@@ -53,7 +55,7 @@ namespace hotel.praktika.Pages
                 {
                     MessageBox.Show("Вы успешно авторизованы!");
                     countClick = 0;
-                    NavigationService.Navigate(new MainMenuPage(context));
+                    NavigationService.Navigate(new MainMenuPage(context, window));
 
 
                 }
