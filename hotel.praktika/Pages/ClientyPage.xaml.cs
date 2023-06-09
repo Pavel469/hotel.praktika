@@ -20,9 +20,12 @@ namespace hotel.praktika.Pages
     /// </summary>
     public partial class ClientyPage : Page
     {
-        public ClientyPage()
+        HotelEntities context;
+        public ClientyPage(HotelEntities _cont)
         {
             InitializeComponent();
+            context= _cont;
+            /*countCli.Text = context.Client.Count();*/
         }
     }
 }

@@ -21,15 +21,22 @@ namespace hotel.praktika.Pages
     public partial class MainMenuPage : Page
     {
         Window Window;
+        HotelEntities _context;
         public MainMenuPage(HotelEntities context,Window window )
         {
             InitializeComponent();
             Window= window;
+            _context = context;
         }
 
         private void EscapeClick(object sender, RoutedEventArgs e)
         {
             Window.Close();
+        }
+
+        private void ClientClick(object sender, RoutedEventArgs e)
+        {
+            frameToBasePages.Navigate(new ClientyPage(_context));
         }
     }
 }
