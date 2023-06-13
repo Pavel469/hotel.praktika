@@ -84,9 +84,6 @@
     <Compile Include="Pages\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Client.xaml.cs">
-      <DependentUpon>Client.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ClientyPage.xaml.cs">
       <DependentUpon>ClientyPage.xaml</DependentUpon>
     </Compile>
@@ -124,10 +121,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Authorization.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Client.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

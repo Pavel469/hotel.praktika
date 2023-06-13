@@ -6,46 +6,33 @@
       xmlns:local="clr-namespace:hotel.praktika.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientyPage">
+      Title="Client">
+
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Foreground="#ffff00" Grid.ColumnSpan="2" FontSize="30">Список Клиентов</TextBlock>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Fill="#228b22" Height="15" VerticalAlignment="Top" Margin="5"/>
-        <TextBlock x:Name="countCli" Grid.Row="2"/>
-        <TextBlock x:Name="sumCli" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right"/>
-        <DataGrid Name="ClientData" AutoGenerateColumns="False" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ФИО" Width="*"/>
-                <DataGridTextColumn  Header="СН паспорта" Width="*"/>
-                <DataGridTextColumn Header="Дата рождения" Width="*"/>
-                <DataGridTemplateColumn Header="Пол" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock><Hyperlink>Редактировать</Hyperlink></TextBlock>
-                                <TextBlock><Hyperlink>Удалить</Hyperlink></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-        
             
+        </Grid.RowDefinitions>
+
+
+
+        <StackPanel Orientation="Horizontal"  Background="#50c878" Grid.Column="1" Margin="5,0,0,0">
+            <TextBlock Margin="10,106,651,314"  FontSize="30">Поиск</TextBlock>
+        </StackPanel>
+        <TextBlock FontSize="50" Foreground="#ffff00" Margin="5,0,271,392" Grid.Column="1">Клиенты</TextBlock>
+        <StackPanel>
+            <TextBox Name="PoiskBox" Margin="140"></TextBox>
+        </StackPanel>
+  
      
-        
+       
+
+
+
+
     </Grid>
 </Page>

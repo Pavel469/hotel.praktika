@@ -30,7 +30,7 @@ namespace hotel.praktika.Pages
         {
             Users users = new Users() { Login = emailBox.Text, Password = passwordBox.Text, service_number = service_numberBox.Text };
             context.Users.Add(users);
-            context.SaveChanges();
+            int v = context.SaveChanges();
             this.Close();
 
         }

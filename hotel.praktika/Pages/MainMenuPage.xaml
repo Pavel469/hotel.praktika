@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+           
         </Grid.RowDefinitions>
         <Frame Name="frameToBasePages" Grid.Column="1"/>
 
@@ -29,7 +29,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
+                    
                 </Grid.RowDefinitions>
 
             </Grid>

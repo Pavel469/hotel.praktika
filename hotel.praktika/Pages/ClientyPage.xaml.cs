@@ -23,9 +23,15 @@ namespace hotel.praktika.Pages
         HotelEntities context;
         public ClientyPage(HotelEntities _cont)
         {
+           
             InitializeComponent();
-            context= _cont;
-            /*countCli.Text = context.Client.Count();*/
+      /*      context = _cont;
+            countCli.Text = $"{context.Client.Count()}ФИО";
+            sumCli.Text = $"Количество свободных комнат {context.Client.Sum((x.))}";*/
+
+
         }
+
+        
     }
 }
